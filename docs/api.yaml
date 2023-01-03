@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: BTC Billionare
+  description: |-
+    BTC Billionare APIs
+  version: 1.0.0
+servers:
+  - url: http://localhost:1323
+tags:
+  - name: wallet
+    description: Wallet Information
+    externalDocs:
+      description: Find out more
+      url: http://localhost:1323 
+paths:
+  /wallet:
+    get:
+        tags:
+          - wallet
+        summary: Returns amounts from the wallet
+        description: Fetches multiple wallet values
+        operationId: getWallet
+        parameters:
+          - name: startDatetime
+            in: query
+            description: start time for wallets entries
+            required: false
+            schema:
+              type: string
+              format: date-time
+              default: ""
+          - name: endDatetime
+            in: query
+            description: end time for wallets entries
+            required: false
+            schema:
+              type: string
+              format: date-time
+              default: ""
+        responses:
+          '200':
+            description: successful operation
+            content:
+              application/json:
+                schema:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      amount:
+                        type: number
+                        default: 12.19
+                      datetime:
+                        type: string
+                        format: date-time
+    post:
+        tags:
+          - wallet
+        summary: Add amount to wallet
+        description: Receive amount to wallet
+        operationId: postWallet
+        requestBody:
+          description: Add new amount
+      
+          content:
+            application/json:
+              schema:
+                required:
+                  - amount
+                type: object
+                properties:
+                  amount:
+                    type: number
+                  datetime:
+                    type: string
+                    format: date-time
+          required: true
+        responses:
+          '201':
+            description: Successful operation
+          '400':
+            description: Bad request
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
